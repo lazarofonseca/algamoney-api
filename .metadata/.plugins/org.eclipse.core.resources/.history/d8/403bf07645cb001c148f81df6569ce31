@@ -1,0 +1,21 @@
+package com.algamoney.api.controller;
+
+import java.util.Scanner;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/hello")
+public class Hello {
+	
+	Scanner sc = new Scanner(System.in);
+	
+	String nome = sc.nextLine();
+		
+	
+	public String mensagemDeBoasVindas(String nome) {
+		return "Seja bem vindo ";
+	}
+
+}

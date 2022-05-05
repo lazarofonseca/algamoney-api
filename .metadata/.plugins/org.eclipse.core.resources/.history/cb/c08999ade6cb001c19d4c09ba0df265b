@@ -1,0 +1,37 @@
+package com.algamoney.api.categoria.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.algamoney.api.categoria.repository.CategoriaRepository;
+import com.algamoney.api.entities.Categoria;
+
+@RestController
+@RequestMapping("/categorias")
+public class CategoriaController {
+	
+	@Autowired
+	private CategoriaRepository categoriaRepository;
+	
+	@GetMapping("/buscar")
+	public List<Categoria> buscaCaterorias(){
+		List<Categoria> lista = categoriaRepository.findAll();
+		return lista;
+	}
+	
+	@GetMapping("/buscar/{codigo}")
+	public String buscaCategoriPorId(@PathVariable Long codigo) {
+		
+		Categoria categoria = categoriaRepository.getById(codigo);
+		String nome = categoria.getNome();
+		
+		return nome;
+		
+	}
+
+}

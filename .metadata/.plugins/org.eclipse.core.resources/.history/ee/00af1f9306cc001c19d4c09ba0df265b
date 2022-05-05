@@ -1,0 +1,58 @@
+package com.algamoney.api.service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.algamoney.api.categori.dto.CategoriaDTO;
+import com.algamoney.api.categoria.repository.CategoriaRepository;
+import com.algamoney.api.entities.Categoria;
+import com.algamoney.api.exception.DefaultException;
+
+@Service
+public class CategoriaService {
+
+	@Autowired
+	private CategoriaRepository categoriaRepository;
+
+	@Transactional
+	public List<CategoriaDTO> findAll() {
+		List<Categoria> categorias = categoriaRepository.findAll();
+		List<CategoriaDTO> listaCategoriaDTO = retornaCategoriaDTO(categorias);
+		return listaCategoriaDTO;
+	}
+	
+	@Transactional
+	public CategoriaDTO buscaPorId(Long codigo) {
+		Categoria categoriaObj = categoriaRepository.findById(codigo).orElseThrow(
+				() -> new DefaultException("Categoria com codigo " + codigo + " não encontrado"));
+		return new CategoriaDTO(categoriaObj);
+	}
+	
+	public CategoriaDTO save(CategoriaDTO categoriaDTO) {
+		Categoria categoria = new Categoria(categoriaDTO);
+		categoriaRepository.save(categoria);
+		return new CategoriaDTO(categoria);
+	}
+ 	
+	
+	
+	
+	
+	
+	public static List<CategoriaDTO> retornaCategoriaDTO(List<Categoria> lista){
+		List<CategoriaDTO> listaCategoria = new ArrayList<>();
+		for (Categoria categoria : lista) {
+			CategoriaDTO categoriaDTO = new CategoriaDTO();
+			categoriaDTO.setCodigo(categoria.getCodigo());
+			categoriaDTO.setNome(categoria.getNome());
+			listaCategoria.add(categoriaDTO);
+		}
+		return listaCategoria;
+	}
+
+}

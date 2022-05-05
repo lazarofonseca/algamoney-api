@@ -1,0 +1,9 @@
+package com.algamoney.api.exception;
+
+public class DefaultException extends RuntimeException{
+	
+	public DefaultException(String msg) {
+		super(msg);
+	}
+
+}

@@ -1,0 +1,5 @@
+package com.algamoney.api.service;
+
+public class CategoriaService {
+
+}

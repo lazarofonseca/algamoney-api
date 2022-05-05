@@ -1,0 +1,18 @@
+package com.algamoney.api.categori.dto;
+
+public class CategoriaDTO {
+	
+	private Long codigo;
+	private String nome;
+	
+	public CategoriaDTO() {
+	}
+	
+	public CategoriaDTO(Long codigo, String nome) {
+		this.codigo = codigo;
+		this.nome = nome;
+	}
+	
+	
+
+}
